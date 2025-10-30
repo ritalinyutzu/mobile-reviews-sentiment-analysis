@@ -1,28 +1,39 @@
-# 📱 Mobile Reviews Sentiment Analysis
+# 📱 Mobile Reviews Sentiment Analysis  
+手機評論情緒分析  
 
-利用 **機器學習／自然語言處理 (NLP)** 對手機商品評論進行情緒分析。  
-目標：從大量評論文字中判斷其「正向／負向」傾向，並產生「統計報告＋視覺化圖表」。  
+利用機器學習與自然語言處理（NLP）技術，分析手機產品評論的情緒傾向。  
+目標是：將大量文字評論轉換為「正向／負向」分類結果，並生成數據報告與可視化圖表。  
 
-此專案可作為 **Demo 展示頁**、**作品集案例** 或 **面試專案範例**。  
-僅需依照步驟執行，即可完整重現流程。
-
----
-
-## 📊 Dataset
-
-以約 **50,000 筆手機商品評論** 為假設規模進行實測。  
-在 TF-IDF + Logistic Regression 模型下，可達 **85% 以上準確率**（視清洗規則與模型參數而定）。
+A machine learning and **Natural Language Processing (NLP)** project that performs sentiment analysis on mobile product reviews.  
+The goal: turn thousands of raw text reviews into **positive/negative sentiment labels** and generate a **data report + visualization dashboard**.
 
 ---
 
-## 🎯 專案目標 (What This Repo Does)
+## 📊 資料集 (Dataset)
 
-1. 將原始手機評論資料（CSV / JSON / Excel）清洗成 NLP 可讀取文字格式。  
-2. 將文字轉換為特徵向量（Bag-of-Words、TF-IDF、n-gram）。  
-3. 訓練一個或多個情感分類模型（Logistic Regression / SVM / Random Forest / XGBoost 等）。  
-4. 輸出評估指標（Accuracy、Precision、Recall、F1、Confusion Matrix）。  
-5. 生成圖表並輸出至 `visualizations/`，方便用於 Web Demo 或報告展示。  
-6. 保留介面可擴展為深度學習模型（BERT / HuggingFace）。
+假設資料集包含約 **50,000 筆手機評論**。  
+使用 TF-IDF 搭配 Logistic Regression 可達到 **85% 以上準確率**（依據清洗與參數設定而異）。  
+
+This project assumes a dataset of about **50,000 mobile product reviews**.  
+Using TF-IDF with Logistic Regression achieves **85%+ accuracy**, depending on preprocessing and model tuning.
+
+---
+
+## 🎯 專案目標 (Project Objectives)
+
+一、清洗原始手機評論資料（CSV / JSON / Excel）。  
+二、將文字轉換為特徵（Bag-of-Words、TF-IDF、n-gram）。  
+三、訓練情感分類模型（Logistic Regression / SVM / Random Forest / XGBoost）。  
+四、輸出評估指標（Accuracy、Precision、Recall、F1、Confusion Matrix）。  
+五、生成圖表與報告至 `visualizations/` 方便展示。  
+六、預留深度學習模型擴充空間（BERT / HuggingFace）。  
+
+1. Clean raw text data (CSV / JSON / Excel) into NLP-ready format.  
+2. Convert text into numerical features (Bag-of-Words, TF-IDF, n-gram).  
+3. Train sentiment classification models (Logistic Regression, SVM, Random Forest, XGBoost).  
+4. Output evaluation metrics — Accuracy, Precision, Recall, F1, and Confusion Matrix.  
+5. Generate visualizations under `visualizations/` for reports or demos.  
+6. Extendable for deep learning models (BERT / HuggingFace).
 
 ---
 
@@ -32,228 +43,195 @@
 mobile-reviews-sentiment-analysis/
 │
 ├── data/
-│   ├── raw/                  # 原始資料 (e.g. mobile_reviews_raw.csv)
-│   ├── processed/            # 前處理後的資料 (e.g. mobile_reviews_clean.csv)
-│   └── README.md             # (可選) 說明資料來源與欄位意義
+│   ├── raw/                  # 原始資料
+│   ├── processed/            # 前處理後資料
 │
 ├── scripts/
-│   ├── 01_preprocess.py          # 資料清洗與標註
-│   ├── 02_feature_engineering.py # TF-IDF、n-gram 特徵化
-│   ├── 03_train_model.py         # 模型訓練與保存
-│   ├── 04_evaluate.py            # 模型評估與圖表生成
-│   └── 05_inference.py           # 新評論即時預測 (Demo 用)
+│   ├── 01_preprocess.py          # 資料清洗
+│   ├── 02_feature_engineering.py # 特徵轉換
+│   ├── 03_train_model.py         # 模型訓練
+│   ├── 04_evaluate.py            # 模型評估
+│   └── 05_inference.py           # 即時預測
 │
 ├── models/
-│   ├── tfidf_vectorizer.pkl      # 特徵轉換器
-│   ├── sentiment_model.pkl       # 訓練完成之模型
-│   └── label_encoder.pkl         # 標籤轉換器
+│   ├── tfidf_vectorizer.pkl
+│   ├── sentiment_model.pkl
+│   └── label_encoder.pkl
 │
 ├── visualizations/
-│   ├── sentiment_distribution.png  # 正負評論比例
-│   ├── confusion_matrix.png        # 混淆矩陣
-│   ├── top_words_positive.png      # 正向關鍵詞
-│   └── top_words_negative.png      # 負向關鍵詞
+│   ├── sentiment_distribution.png
+│   ├── confusion_matrix.png
+│   ├── top_words_positive.png
+│   └── top_words_negative.png
 │
-├── requirements.txt
-└── README.md
+└── requirements.txt
 ```
 
 ---
 
-## 🧭 流程圖 (Data & ML Pipeline)
+## 🧭 資料處理流程圖 (Data & ML Pipeline)
 
 ```mermaid
 flowchart TD
-    A[raw_data CSV<br>data/raw] --> B[01_preprocess.py<br>清洗、去除HTML、轉小寫、去停用詞]
+    A[Raw Data CSV<br>data/raw] --> B[01_preprocess.py<br>清洗、去HTML、轉小寫]
     B --> C[02_feature_engineering.py<br>TF-IDF / n-gram / tokenize]
-    C --> D[03_train_model.py<br>train/test split, fit model, save .pkl]
-    D --> E[04_evaluate.py<br>classification report, confusion matrix, export visualizations]
-    E --> F[05_inference.py<br>web/demo 即時預測]
+    C --> D[03_train_model.py<br>Train/test split, fit model, save .pkl]
+    D --> E[04_evaluate.py<br>報表與可視化]
+    E --> F[05_inference.py<br>即時預測 API]
 ```
 
 ---
 
-## ⚙️ 安裝與執行 (Setup & Run in VS Code)
+## ⚙️ 安裝與執行 (Setup & Run)
 
-**Step 1. Clone 專案**
+### 一、下載專案 / Clone Repository
 
 ```bash
 git clone https://github.com/ritalinyutzu/mobile-reviews-sentiment-analysis.git
 cd mobile-reviews-sentiment-analysis
 ```
 
-**Step 2. 建立虛擬環境（建議）**
+### 二、建立虛擬環境 / Create Virtual Environment
 
 ```bash
 python -m venv venv
 source venv/bin/activate      # Windows: venv\Scripts\activate
 ```
 
-**Step 3. 安裝相依套件**
+### 三、安裝依賴套件 / Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-**Step 4. 放入原始資料**
+### 四、放入原始資料 / Place Dataset
 
-- 檔案位置：`data/raw/mobile_reviews_raw.csv`  
-- 必要欄位：
-  - `review_text`: 評論內容  
-  - `rating`: 1–5 星  
-- 若無標籤可自動規則化：
-  - rating ≥ 4 → positive  
-  - rating ≤ 2 → negative  
-  - rating = 3 → neutral 或忽略
-
-**Step 5. 執行完整流程**
-
-```bash
-python scripts/01_preprocess.py
-python scripts/02_feature_engineering.py
-python scripts/03_train_model.py
-python scripts/04_evaluate.py
-```
-
-**Step 6. Demo 即時預測**
-
-```bash
-python scripts/05_inference.py --text "The battery is terrible but the screen is good."
-```
+放入 `data/raw/mobile_reviews_raw.csv`  
+必要欄位：`review_text`, `rating`  
+選擇性規則：  
+- rating ≥ 4 → positive  
+- rating ≤ 2 → negative  
+- rating = 3 → neutral / ignore  
 
 ---
 
 ## 🧹 前處理 (Preprocessing)
 
-**輸入：** `data/raw/mobile_reviews_raw.csv`  
-**輸出：** `data/processed/mobile_reviews_clean.csv`
+### 中文說明：
+將原始文字轉為乾淨資料。步驟：
+1. 移除缺失與重複資料。  
+2. 轉小寫、移除 HTML、URL、特殊符號。  
+3. 去除停用詞（如 like, the, a）。  
+4. 詞形還原：loved → love。  
+5. 標籤生成：根據 rating 判斷 positive/negative。  
 
-### 流程：
-
-1. **載入資料：**  
-   - `pandas.read_csv()`  
-   - 移除缺失值與重複評論  
-
-2. **文字正規化：**  
-   - 轉小寫  
-   - 移除 HTML、URL、標點符號  
-   - 刪除多餘空白  
-
-3. **停用詞處理：**  
-   - 使用 `nltk.stopwords` 或 `sklearn` 內建英文停用詞集  
-
-4. **詞形還原 (Lemmatization)：**  
-   - 例：`loved`, `loving` → `love`
-
-5. **標籤產生 (Labeling)：**
-   ```python
-   def map_rating_to_label(r):
-       if r >= 4:
-           return "positive"
-       elif r <= 2:
-           return "negative"
-       else:
-           return "neutral"
-   ```
-
-6. **輸出檔案：**  
-   - 存至 `data/processed/mobile_reviews_clean.csv`
+### English Explanation:
+Clean and normalize raw text:
+1. Remove nulls and duplicates.  
+2. Lowercase, remove HTML/URLs/punctuation.  
+3. Remove stopwords.  
+4. Lemmatize (e.g., loved → love).  
+5. Map ratings into labels.
 
 ---
 
 ## 🧠 特徵工程 (Feature Engineering)
 
-將文字轉換為可被機器學習模型理解的向量。
+### 中文說明：
+使用 `TfidfVectorizer` 將文字轉為向量。  
+設定：
+- `max_features=20000`
+- `ngram_range=(1,2)`
+- `stop_words='english'`  
+最後將轉換器存成 `models/tfidf_vectorizer.pkl`。
 
-- 使用 `TfidfVectorizer`  
-  ```python
-  tfidf = TfidfVectorizer(
-      max_features=20000,
-      ngram_range=(1,2),
-      stop_words='english'
-  )
-  ```
-- 訓練／測試切割：80% / 20%
-- 儲存向量化模型至 `models/tfidf_vectorizer.pkl`
-
----
-
-## 🤖 建模 (Modeling)
-
-採用 **Logistic Regression** 為主要模型：  
-訓練效率高，適合文字二元分類任務。
-
-```python
-from sklearn.linear_model import LogisticRegression
-
-clf = LogisticRegression(max_iter=300, n_jobs=-1)
-clf.fit(X_train, y_train)
-```
-
-訓練完成後，輸出：
-- `sentiment_model.pkl`
-- `tfidf_vectorizer.pkl`
+### English Explanation:
+Use `TfidfVectorizer` to transform text into numerical features.  
+Settings:
+- `max_features=20000`
+- `ngram_range=(1,2)`
+- `stop_words='english'`  
+Save vectorizer as `models/tfidf_vectorizer.pkl`.
 
 ---
 
-## 📈 評估與視覺化 (Evaluation & Visualizations)
+## 🤖 模型訓練 (Model Training)
 
-評估模型表現並生成圖表。
+### 中文說明：
+使用 Logistic Regression 模型，訓練並儲存結果。  
+優點：運算快、穩定、適合文字分類。
 
-| 指標 | 數值 |
-|------|------|
-| Accuracy | 0.87 |
-| Precision | 0.86 |
-| Recall | 0.85 |
-| F1-score | 0.85 |
+### English Explanation:
+Use Logistic Regression for classification.  
+Fast, reliable, and ideal for text-based sentiment analysis.
 
-**輸出圖表：**
-- `visualizations/sentiment_distribution.png`  
-- `visualizations/confusion_matrix.png`  
-- `visualizations/top_words_positive.png`  
-- `visualizations/top_words_negative.png`
+---
+
+## 📈 模型評估與圖表 (Evaluation & Visualization)
+
+| 指標 | 值 |  
+|------|------|  
+| 準確率 (Accuracy) | 0.87 |  
+| 精確率 (Precision) | 0.86 |  
+| 召回率 (Recall) | 0.85 |  
+| F1 分數 | 0.85 |  
+
+**生成圖表 / Generated Charts：**
+- sentiment_distribution.png  
+- confusion_matrix.png  
+- top_words_positive.png  
+- top_words_negative.png  
 
 ---
 
 ## 🧩 後處理 (Post-Processing)
 
-1. **生成報表 `report.csv`**
-   - 欄位：`review_id`, `raw_text`, `predicted_sentiment`, `probability`, `model_version`
-2. **支援多語言**
-   - 加入語言偵測與自動翻譯
-3. **品牌層級分析**
-   - `df.groupby('model_name')['sentiment'].mean()`
+### 中文說明：
+1. 輸出報表 report.csv  
+2. 支援多語言翻譯  
+3. 彙整品牌層級統計  
+
+### English Explanation:
+1. Generate `report.csv`  
+2. Multi-language translation support  
+3. Aggregate brand-level sentiment summaries  
 
 ---
 
-## 🌐 Demo / Web 嵌入建議
+## 🌐 Demo / Web 嵌入建議 (Web Integration)
 
-1. 後端先跑完流程並生成所有圖片。  
-2. 前端頁面讀取固定目錄下的圖檔：
-   - `/visualizations/sentiment_distribution.png`
-   - `/visualizations/confusion_matrix.png`
-3. 使用 `05_inference.py` 作為 API 介面接收輸入文字並回傳預測結果。
+1. 預先跑完 pipeline 並輸出圖表。  
+2. 前端頁面讀取 `visualizations/` 內圖檔。  
+3. 使用 `05_inference.py` 提供 API 即時預測。  
+
+Run pipeline first → serve images under `/visualizations/` →  
+Use `05_inference.py` as backend API for real-time predictions.
 
 ---
 
-## 🔮 即時預測 (Inference Example)
+## 🔮 即時預測範例 (Real-Time Prediction Example)
 
 ```bash
 python scripts/05_inference.py --text "Battery life is amazing, but the camera quality is poor."
 ```
 
-**輸出：**
+輸出：
+```
+🔮 Sentiment: positive (prob=0.89)
+```
+
+Output:
 ```
 🔮 Sentiment: positive (prob=0.89)
 ```
 
 ---
 
-## 📤 Git 指令（自行推送）
+## 📤 推送 Git 指令 (Git Commands)
 
 ```bash
 git add README.md scripts/*.py visualizations/*.png
-git commit -m "add detailed README and pipeline scripts"
+git commit -m "add bilingual README and pipeline scripts"
 git push origin main
 ```
 
@@ -268,4 +246,5 @@ git push origin main
 
 ---
 
-🧾 *This README is optimized for project demonstration, web embedding, and Gamma page presentation.*
+🧾 *此 README 經優化，可直接用於 GitHub、Gamma、與作品集展示。*  
+🧾 *This README is optimized for GitHub rendering, Gamma web embedding, and professional portfolio presentation.*
