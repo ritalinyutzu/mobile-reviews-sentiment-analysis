@@ -1,0 +1,60 @@
+================================================================================
+文本預處理報告
+================================================================================
+
+處理記錄數: 50,000
+主要文本欄位: review_text
+
+情感分佈:
+sentiment_label
+positive    35498
+neutral      7519
+negative     6983
+Name: count, dtype: int64
+
+極性統計:
+count    50000.000000
+mean         0.176889
+std          0.327963
+min         -0.975000
+25%          0.087500
+50%          0.250000
+75%          0.366667
+max          0.750000
+Name: polarity, dtype: float64
+
+Top 30 詞頻:
+  use                           :   11,148
+  worth                         :   10,640
+  loving                        :    9,754
+  absolutely                    :    9,556
+  best                          :    8,103
+  okay                          :    7,946
+  regret                        :    7,824
+  buying                        :    7,824
+  far                           :    7,004
+  purchase                      :    6,869
+  year                          :    6,869
+  one                           :    6,839
+  could                         :    6,674
+  fast                          :    6,400
+  quality                       :    5,955
+  phone                         :    5,953
+  smooth                        :    5,539
+  feel                          :    5,507
+  overall                       :    5,482
+  better                        :    5,405
+  average                       :    5,382
+  fine                          :    5,326
+  battery                       :    5,022
+  camera                        :    4,913
+  casual                        :    4,285
+  experience                    :    4,172
+  performance                   :    4,033
+  update                        :    4,024
+  design                        :    3,957
+  gaming                        :    3,794
+
+
+TF-IDF 特徵數: 1000
+特徵矩陣形狀: (50000, 329)

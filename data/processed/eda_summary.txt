@@ -1,0 +1,55 @@
+================================================================================
+EDA 摘要報告
+================================================================================
+
+數據集形狀: 50,000 行 × 27 列
+
+欄位資訊:
+--------------------------------------------------------------------------------
+review_id: int64
+customer_name: object
+age: int64
+brand: object
+model: object
+price_usd: float64
+price_local: object
+currency: object
+exchange_rate_to_usd: float64
+rating: int64
+review_text: object
+sentiment: object
+country: object
+language: object
+review_date: object
+verified_purchase: bool
+battery_life_rating: int64
+camera_rating: int64
+performance_rating: int64
+design_rating: int64
+display_rating: int64
+review_length: int64
+word_count: int64
+helpful_votes: int64
+source: object
+review_text_length: int64
+review_text_word_count: int64
+
+缺失值:
+--------------------------------------------------------------------------------
+Empty DataFrame
+Columns: [缺失數量, 缺失百分比]
+Index: []
+
+數值欄位統計:
+--------------------------------------------------------------------------------
+          review_id           age  ...    word_count  helpful_votes
+count  50000.000000  50000.000000  ...  50000.000000   50000.000000
+mean   25000.500000     30.075220  ...     10.623820       3.644180
+std    14433.901067      8.931307  ...      1.957239       2.432745
+min        1.000000     18.000000  ...      6.000000       0.000000
+25%    12500.750000     23.000000  ...      9.000000       2.000000
+50%    25000.500000     29.000000  ...     11.000000       3.000000
+75%    37500.250000     36.000000  ...     12.000000       5.000000
+max    50000.000000     65.000000  ...     15.000000      17.000000
+
+[8 rows x 13 columns]
